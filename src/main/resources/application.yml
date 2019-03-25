@@ -1,0 +1,48 @@
+#spring.datasource.url=jdbc:mysql://127.0.0.1:3306/dt
+#spring.datasource.username=root
+#spring.datasource.password=password
+spring:
+  datasource:
+    url: jdbc:p6spy:mysql://10.10.65.43:3306/test
+    username: root
+    password: root
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+  jpa:
+    #    database-platform: org.hibernate.dialect.MySQL57Dialect
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+    open-in-view: true
+    properties:
+      javax.persistence.sharedCache.mode: ENABLE_SELECTIVE
+      javax.cache.missing_cache_strategy: create
+      hibernate:
+        #generate_statistics: true
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+          #provider_class: org.hibernate.cache.EhCacheProvider
+          #provider_configuration: classpath:ehcache.xml
+          provider_configuration_file_resource_path: classpath:ehcache.xml
+          #factory_class: org.hibernate.cache.internal.EhCacheRegionFactory
+          region:
+            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+            #region:
+            # factory_class: org.hibernate.cache.internal.EhCacheRegionFactory
+  cache:
+    ehcache:
+      config: classpath:ehcache-os.xml
+    type: ehcache
+#  entry key="hibernate.cache.use_second_level_cache" value="false" /><!--开启二级缓存-->
+#  <entry key="hibernate.cache.use_query_cache" value="false" /><!--开启查询缓存-->
+#
+#  <entry key="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>  <!--ehcache支持-->
+#  <entry key="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" /><!--ehcache支持-->
+#  <entry key="hibernate.cache.provider_configuration" value="classpath:ehcache.xml"/><!--ehcache详细配置-->
+
+server:
+  port: 9999
+logging:
+  level:
+    org.hibernate: info
+    org.ligson: debug
