@@ -23,23 +23,20 @@ spring:
           use_query_cache: true
           #provider_class: org.hibernate.cache.EhCacheProvider
           #provider_configuration: classpath:ehcache.xml
-          provider_configuration_file_resource_path: classpath:ehcache.xml
+          redisson:
+            config: singleServerConfig.yml
           #factory_class: org.hibernate.cache.internal.EhCacheRegionFactory
           region:
-            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+            factory_class: org.redisson.hibernate.RedissonRegionFactory
             #region:
             # factory_class: org.hibernate.cache.internal.EhCacheRegionFactory
   cache:
-    ehcache:
-      config: classpath:ehcache-os.xml
-    type: ehcache
-#  entry key="hibernate.cache.use_second_level_cache" value="false" /><!--开启二级缓存-->
-#  <entry key="hibernate.cache.use_query_cache" value="false" /><!--开启查询缓存-->
-#
-#  <entry key="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>  <!--ehcache支持-->
-#  <entry key="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" /><!--ehcache支持-->
-#  <entry key="hibernate.cache.provider_configuration" value="classpath:ehcache.xml"/><!--ehcache详细配置-->
-
+    type: REDIS
+    redis:
+      key-prefix: oscache
+  redis:
+    host: 10.10.65.43
+    port: 6379
 server:
   port: 9999
 logging:

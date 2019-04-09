@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ import java.util.Set;
 @Table(name = "f_org")
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "userCache")
 @Cacheable
-public class Org {
+public class Org implements Serializable {
     @Id
     @GenericGenerator(name = "jpa-uuid", strategy = "org.hibernate.id.UUIDGenerator")
     @GeneratedValue(generator = "jpa-uuid")
